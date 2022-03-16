@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux'
+import { addedToCart } from "../features/Cart/cartSlice";
 
 
 function ProductItem({element}) {
@@ -7,7 +9,7 @@ function ProductItem({element}) {
 
   // addedToCart
   const addedToCart = (item) => {
-    console.log(item);
+    
     settoast((state) => {
       return !state;
     });

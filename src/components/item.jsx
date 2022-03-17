@@ -68,7 +68,7 @@ function ProductItem({element}) {
 
       {
         toast && (
-          <div className="fixed top-4 right-4 transition text-white bg-green-500 hover:bg-green-600 rounded-md px-5 py-4 cursor-pointer z-50">
+          <div className="fixed top-4 left-4 transition text-white bg-green-500 hover:bg-green-600 rounded-md px-5 py-4 cursor-pointer z-50">
               <div className="flex items-center space-x-2">
                 <svg
                   fill="none"

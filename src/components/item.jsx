@@ -1,11 +1,21 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { addedToCart } from "../features/Cart/cartSlice";
+import { addToCart } from "../features/Cart/cartSlice";
 
 
 function ProductItem({element}) {
   const [toast, settoast] = useState(false);
+  // stars logic
   const stars = Math.round(element.rating.rate) || 0;
+  let starsCount = [];
+  for (let index = 0; index < stars; index++) {    
+    starsCount.push(index);
+  }
+  
+  // redux code
+  // const currentCart = useSelector((state) => state.cart)
+  const dispatch = useDispatch();
+  // console.log(currentCart);
 
   // addedToCart
   const addedToCart = (item) => {
@@ -19,6 +29,9 @@ function ProductItem({element}) {
         return !state;
       });
     }, 3000);
+
+    // dispatch event
+    dispatch(addToCart(item));
   }
   
 
@@ -32,19 +45,13 @@ function ProductItem({element}) {
             <h1 className="text-gray-900 font-bold text-2xl">{element.title}</h1>
             <p className="mt-2 text-gray-600 text-sm">{element.description}</p>
             <div className="flex item-center mt-2">
-              {/* starts */}
-              {/* <svg className="w-5 h-5 fill-current text-gray-700" viewBox="0 0 24 24">
-                <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"/>
-              </svg>
-              <svg className="w-5 h-5 fill-current text-gray-700" viewBox="0 0 24 24">
-                <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"/>
-              </svg>
-              <svg className="w-5 h-5 fill-current text-gray-500" viewBox="0 0 24 24">
-                <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"/>
-              </svg>
-              <svg className="w-5 h-5 fill-current text-gray-500" viewBox="0 0 24 24">
-                <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"/>
-              </svg> */}
+              {
+                starsCount.map(index => (
+                  <svg className="w-5 h-5 fill-current text-gray-700" viewBox="0 0 24 24" key={index}>
+                    <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"/>
+                  </svg>
+                ))
+              }
             </div>
             <div className="flex item-center justify-between mt-3">
               <h1 className="text-gray-700 font-bold text-xl">AED {element.price}</h1>
@@ -63,23 +70,22 @@ function ProductItem({element}) {
         toast && (
           <div className="fixed top-4 right-4 transition text-white bg-green-500 hover:bg-green-600 rounded-md px-5 py-4 cursor-pointer z-50">
               <div className="flex items-center space-x-2">
-              <svg
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-                width={24}
-                height={24}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={3}
-                  d="m5 13 4 4L19 7"
-                />
-              </svg>
-
-                  <p className="font-bold ">Item Added Successfully!</p>
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width={24}
+                  height={24}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={3}
+                    d="m5 13 4 4L19 7"
+                  />
+                </svg>
+                <p className="font-bold ">Item Added Successfully!</p>
               </div>
           </div>
         )

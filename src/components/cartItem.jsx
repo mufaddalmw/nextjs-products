@@ -10,7 +10,7 @@ function CartItem({element}) {
   for (let index = 0; index < stars; index++) {    
     starsCount.push(index);
   }
-  
+  console.log(element);
   // redux code
   const dispatch = useDispatch();
   
@@ -40,6 +40,7 @@ function CartItem({element}) {
             </div>
             <div className="flex item-center justify-between mt-3">
               <h1 className="text-gray-700 font-bold text-xl">AED {element.price}</h1>
+              Qty 
               <button className="w-6 h-6 absolute right-3 top-3" title="Remove from Cart" onClick={() => dispatch(removeFromCart(element))}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

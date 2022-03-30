@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
 import { addToCart } from "../features/Cart/cartSlice";
+import Toast from "../components/toast";
+import { showToast, hideToast } from "../features/Cart/toastSlice";
 
 
 function ProductItem({element}) {
@@ -13,9 +15,7 @@ function ProductItem({element}) {
   }
   
   // redux code
-  // const currentCart = useSelector((state) => state.cart)
   const dispatch = useDispatch();
-  // console.log(currentCart);
 
   // addedToCart
   const addedToCart = (item) => {
@@ -32,6 +32,8 @@ function ProductItem({element}) {
 
     // dispatch event
     dispatch(addToCart(item));
+    dispatch(showToast(true));
+    
   }
   
 
@@ -67,28 +69,7 @@ function ProductItem({element}) {
       </div>
 
       {
-        toast && (
-          <div className="fixed top-4 left-4 transition text-white bg-green-500 hover:bg-green-600 rounded-md px-5 py-4 cursor-pointer z-50">
-              <div className="flex items-center space-x-2">
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={24}
-                  height={24}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={3}
-                    d="m5 13 4 4L19 7"
-                  />
-                </svg>
-                <p className="font-bold ">Item Added Successfully!</p>
-              </div>
-          </div>
-        )
+        toast && <Toast />
       }
     </>
   );

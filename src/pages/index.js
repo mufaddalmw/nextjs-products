@@ -1,7 +1,7 @@
 
 import Link from "next/link";
 import { useSelector } from "react-redux";
-import ProductItem from "../components/item";
+import ProductItem from "../components/productItem";
 
 
 export default function Home({ data }) {

@@ -5,7 +5,7 @@ import CartItem from "../components/cartItem";
 
 export default function Cart() { 
   const currentCart = useSelector((state) => state.cart);
-  console.log(currentCart);
+  
   return (
     <>
       <header className="flex justify-end p-3">
